@@ -50,7 +50,7 @@ You can then execute your binary: `./target/arango-quarkus-native-example-1.0-SN
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image-guide .
 
 
-## request version
+## Request Version
 
 ```shell script
 curl http://localhost:8080/version
