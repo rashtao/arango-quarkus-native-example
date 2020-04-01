@@ -32,3 +32,4 @@ jobs:
         run: ./docker/start_db_single.sh docker.io/arangodb/arangodb:3.6.2
       - name: verify
         run: mvn verify -Pnative
+
