@@ -6,14 +6,23 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## prerequisites
 
-- Checkout and install the latest snapshot version of the driver:
+Start a local database:
 
 ```shell script
-git clone git@github.com:arangodb/arangodb-java-driver.git
-cd arangodb-java-driver
-mvn clean install -Dgpg.skip -DskipTests=true
 docker run -e ARANGO_ROOT_PASSWORD=test -p 8529:8529 --rm arangodb:3.6
 ``` 
+
+## test
+
+```shell script
+mvn test
+```
+
+## test native
+
+```shell script
+mvn verify -Pnative
+```
 
 ## Running the application in dev mode
 
@@ -39,3 +48,10 @@ Or you can use Docker to build the native executable using: `./mvnw package -Pna
 You can then execute your binary: `./target/arango-quarkus-native-example-1.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image-guide .
+
+
+## request version
+
+```shell script
+curl http://localhost:8080/version
+```
