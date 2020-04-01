@@ -1,0 +1,34 @@
+name: Native CI
+
+on: push
+
+jobs:
+
+  verify:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+          - java8
+          - java11
+        graalvm-version:
+          - 19.3.1
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup GraalVM CE
+        uses: rinx/setup-graalvm-ce@v0.0.1
+        with:
+          graalvm-version: ${{ matrix.graalvm-version }}
+          java-version: ${{ matrix.java-version }}
+      - name: setup-native-image
+        run: gu install native-image
+      - name: Info
+        run: mvn -version
+      - name: Start Database
+        run: ./docker/start_db_single.sh docker.io/arangodb/arangodb:3.6.2
+      - name: verify
+        run: mvn verify -Pnative
