@@ -12,10 +12,10 @@ jobs:
       fail-fast: false
       matrix:
         java-version:
-          - java8
           - java11
         graalvm-version:
-          - 19.3.1
+          - 19.3.2
+          - 20.0.0
 
     steps:
       - uses: actions/checkout@v1
