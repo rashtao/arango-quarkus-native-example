@@ -19,12 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Setup GraalVM CE
-        uses: rinx/setup-graalvm-ce@v0.0.1
+        uses: rinx/setup-graalvm-ce@v0.0.5
         with:
           graalvm-version: ${{ matrix.graalvm-version }}
           java-version: ${{ matrix.java-version }}
-      - name: setup-native-image
-        run: gu install native-image
+          native-image: "true"
       - name: Info
         run: mvn -version
       - name: Start Database
