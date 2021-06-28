@@ -14,8 +14,7 @@ jobs:
         java-version:
           - java11
         graalvm-version:
-          - 19.3.2
-          - 20.0.0
+          - 21.1.0
 
     steps:
       - uses: actions/checkout@v1
@@ -29,7 +28,7 @@ jobs:
       - name: Info
         run: mvn -version
       - name: Start Database
-        run: ./docker/start_db_single.sh docker.io/arangodb/arangodb:3.6.2
+        run: ./docker/start_db_single.sh docker.io/arangodb/arangodb:3.7.12
       - name: verify
         run: mvn verify -Pnative
 
