@@ -8,26 +8,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        java-version:
-          - java11
-        graalvm-version:
-          - 21.1.0
-
     steps:
-      - uses: actions/checkout@v1
-      - name: Setup GraalVM CE
-        uses: rinx/setup-graalvm-ce@v0.0.5
+      - uses: actions/checkout@v2
+      - uses: graalvm/setup-graalvm@v1
         with:
-          graalvm-version: ${{ matrix.graalvm-version }}
-          java-version: ${{ matrix.java-version }}
-          native-image: "true"
+          version: 'latest'
+          java-version: '11'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Info
         run: mvn -version
       - name: Start Database
-        run: ./docker/start_db_single.sh docker.io/arangodb/arangodb:3.7.12
+        run: ./docker/start_db_single.sh docker.io/arangodb/arangodb:3.8.5
       - name: verify
         run: mvn verify -Pnative
-
