@@ -1,6 +1,7 @@
 package org.acme.quickstart;
 
 import com.arangodb.ArangoDB;
+import com.arangodb.mapping.ArangoJack;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
@@ -13,7 +14,10 @@ public class ArangoConfiguration {
 
     @Produces
     public ArangoDB arangoDB() {
-        return new ArangoDB.Builder().password("test").build();
+        return new ArangoDB.Builder()
+                .password("test")
+                .serializer(new ArangoJack())
+                .build();
     }
 
 }
