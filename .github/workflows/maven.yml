@@ -19,6 +19,6 @@ jobs:
       - name: Info
         run: mvn -version
       - name: Start Database
-        run: ./docker/start_db_single.sh docker.io/arangodb/arangodb:3.9.0
+        run: ./docker/start_db.sh
       - name: verify
         run: mvn verify -Pnative
