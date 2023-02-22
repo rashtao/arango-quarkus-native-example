@@ -7,12 +7,12 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @QuarkusTest
-class GreetingResourceTest {
+class GreetingAsyncResourceTest {
 
     @Test
     void testVersionEndpoint() {
         String server = given()
-                .when().get("/version")
+                .when().get("/versionAsync")
                 .then()
                 .statusCode(200)
                 .extract()
