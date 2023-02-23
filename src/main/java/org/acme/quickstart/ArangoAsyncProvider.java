@@ -1,6 +1,7 @@
 package org.acme.quickstart;
 
 import com.arangodb.async.ArangoDBAsync;
+import org.eclipse.microprofile.config.inject.ConfigProperties;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
@@ -9,13 +10,12 @@ import javax.enterprise.inject.Produces;
  * @author Michele Rastelli
  */
 @Dependent
-public class ArangoAsyncConfiguration {
+public class ArangoAsyncProvider {
 
     @Produces
-    public ArangoDBAsync arangoDBAsync() {
+    public ArangoDBAsync arangoDBAsync(@ConfigProperties final ArangoConfig config) {
         return new ArangoDBAsync.Builder()
-                .host("127.0.0.1", 8529)
-                .password("test")
+                .loadProperties(config)
                 .build();
     }
 

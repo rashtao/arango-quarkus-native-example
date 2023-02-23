@@ -1,6 +1,7 @@
 package org.acme.quickstart;
 
 import com.arangodb.ArangoDB;
+import org.eclipse.microprofile.config.inject.ConfigProperties;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
@@ -9,13 +10,12 @@ import javax.enterprise.inject.Produces;
  * @author Michele Rastelli
  */
 @Dependent
-public class ArangoConfiguration {
+public class ArangoProvider {
 
     @Produces
-    public ArangoDB arangoDB() {
+    public ArangoDB arangoDB(@ConfigProperties final ArangoConfig config) {
         return new ArangoDB.Builder()
-                .host("127.0.0.1", 8529)
-                .password("test")
+                .loadProperties(config)
                 .build();
     }
 
